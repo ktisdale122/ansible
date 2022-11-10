@@ -1,0 +1,15 @@
+---
+- hosts: servers
+  become: yes
+  tasks:
+
+  - name: ensure ntp (for time synchronization) is installed
+    yum:
+      name: ntp
+      state: present
+
+  - name: ensure ntp is running
+    service:
+      name: ntpd
+      state: started
+      enabled: yes

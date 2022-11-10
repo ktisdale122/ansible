@@ -1,0 +1,20 @@
+# inventory file for ansible lab - red hat training
+
+[myself]
+localhost
+
+[all]
+catl0xlas15065
+catl0xlas15066
+catl0xlas15075
+
+[server]
+catl0xlas15075
+
+[workstation]
+catl0xlas15065
+catl0xlas15066
+
+[prod:children]
+server
+workstation

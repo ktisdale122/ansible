@@ -1,0 +1,5 @@
+The quick brown fox jumps over the lazy dog
+This is my vim practice file.
+There are many like it, but this one is mine.
+More lines, I want more lines
+

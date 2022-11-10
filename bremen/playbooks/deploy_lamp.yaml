@@ -1,0 +1,62 @@
+---
+- hosts: app
+  become: yes
+  tasks:
+ # pre_tasks:
+ #   - name: update yum packages
+ #     yum:
+ #       name: "*"
+ #       state: latests
+ #       update_cache: yes
+        
+ # tasks:
+ #   - name: 
+ #     yum:
+ #       name: {{ item }}
+ #       state: present
+ #     with_items:
+ #       - python
+ #       - python-pycurl
+
+    - name: clean cache
+      command: yum clean expire-cache
+
+    - name: install apache
+      yum:
+        name: httpd
+        state: latest 
+ 
+    - name: restart apache
+      service:
+        name: httpd
+        state: restarted
+
+    - name: install mysql server
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - mariadb-server
+        - mariadb
+        - git
+        - curl
+        - unzip
+        - sendmail
+        
+    - name: restart mariadb
+      service:
+        name: mariadb
+        state: restarted
+
+    - name: install php pre-reqs
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - epel-release
+        - yum-utils
+
+    - name: install php
+      yum:
+        name: http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+        state: present

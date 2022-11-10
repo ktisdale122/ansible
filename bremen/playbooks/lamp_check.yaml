@@ -1,0 +1,21 @@
+---
+- hosts: all
+  become: yes
+
+ # vars_file:
+ #   - vars.yml
+
+  pre_tasks:
+    - name: update yum if needed
+      yum:
+        name: "*"
+        state: latest
+        update_cache: yes
+
+  handlers:
+    - name: restart apache
+      service:
+        name: httpd
+        start: restarted
+
+

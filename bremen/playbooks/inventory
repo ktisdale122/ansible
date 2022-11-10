@@ -1,0 +1,31 @@
+# host file for ansible lab 
+
+
+[servers]
+catl0xlas16760
+catl0xlas16762
+catl0xlas16763
+
+# Application Servers
+[app]
+catl0xlas16760
+catl0xlas16762
+
+# Database Server
+[db]
+catl0xlas16763
+
+# Group 'multi' with all servers
+[multi:children]
+app
+db
+
+# Variables that will be applied to servers
+[multi:vars]
+ansible_ssh_user=ktisdale
+ansible_ssh_private_key_file=~/.ssh/id_ecdsa
+
+# declare group variables
+[group:vars]
+admin_user=ktisdale
+

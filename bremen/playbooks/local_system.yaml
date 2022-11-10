@@ -1,0 +1,11 @@
+---
+- hosts: 127.0.0.1
+  gather_facts: no
+  
+  tasks:
+    - name: check the current system date
+      command: date
+      register: date
+
+    - name: print the current system date
+      debug: var=date.stdout
