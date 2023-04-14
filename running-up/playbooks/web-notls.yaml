@@ -1,0 +1,42 @@
+---
+- name: configure webserver with nginx
+  hosts: web
+  become: True
+  tasks:
+
+    - name: install nginx
+      yum:
+        name: nginx
+        state: present
+
+    - name: create sites-available directory
+      file:
+        path: /etc/nginx/sites-available
+        state: directory
+
+    - name: copy nginx config file
+      copy:
+        src: files/nginx.conf
+        dest: /etc/nginx/sites-available/default
+
+    - name: create sites-enabled directory
+      file:
+        path: /etc/nginx/sites-enabled
+        state: directory
+
+    - name: enable configuration
+      file: 
+        dest: /etc/nginx/sites-enabled/default
+        src: /etc/nginx/sites-available/default
+        state: link
+
+    - name: copy index html
+      template:
+        src: templates/index.html.j2
+        dest: /usr/share/nginx/html/index.html
+        mode: 0644
+
+    - name: restart nginx html
+      service:
+        name: nginx
+        state: restarted

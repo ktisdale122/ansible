@@ -1,0 +1,33 @@
+[localhost]
+127.0.0.1 ansible_connection=local     #10.62.59.135
+
+[servers]
+catl0xlas24612
+catl0xlas24613
+catl0xlas24870
+catl0xlas24871
+catl0xlas24872
+
+[web]
+catl0xlas24612
+catl0xlas24613
+
+[app]
+catl0xlas24870
+catl0xlas24871
+
+[db]
+catl0xlas24872
+
+#[servers:children]
+#web
+#app
+#db
+
+#create server vars
+#[servers:vars]
+ansible_user=ktisdale
+#ansible_become=yes
+#web-package=httpd
+#mariadb-server=mariadb-server
+#mariadb=mariadb
