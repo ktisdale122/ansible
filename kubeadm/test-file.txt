@@ -1,0 +1,9 @@
+UUID=d765ad63-4fdd-44aa-a42a-c23184a8e4e6 /                       xfs     defaults        0 0
+UUID=60eae31a-fac1-4230-b8c2-7a02ad6eb6c8 /boot                   xfs     defaults        0 0
+UUID=B001-80D4          /boot/efi               vfat    defaults,uid=0,gid=0,umask=077,shortname=winnt 0 2
+UUID=0dc2d9a4-5fd1-44a1-b4b0-b9201863a98c swap                    swap    defaults        0 0
+UUID="d396e8a0-39bb-4777-aed1-ad6889a405ac"	/opt/app	ext4	defaults	1 2
+
+
+
+

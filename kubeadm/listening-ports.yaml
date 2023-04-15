@@ -1,0 +1,31 @@
+---
+- hosts: servers
+  become: yes
+  name: check firewall port status
+
+  tasks:
+
+   - name: Gather facts on listening ports
+     listen_ports_facts:
+
+   - name: TCP whitelist violation
+     debug:
+       msg: TCP port {{ item.port }} by pid {{ item.pid }} violates the whitelist
+     vars:
+       tcp_listen_violations: "{{ ansible_facts.tcp_listen | selectattr('port', 'in', tcp_whitelist) | list }}"
+       tcp_whitelist:
+      - 22
+      - 25
+  loop: "{{ tcp_listen_violations }}"
+
+- name: List TCP ports
+  debug:
+    msg: "{{ ansible_facts.tcp_listen  | map(attribute='port') | sort | list }}"
+
+- name: List UDP ports
+  debug:
+    msg: "{{ ansible_facts.udp_listen | map(attribute='port') | sort | list }}"
+
+- name: List all ports
+  debug:
+    msg: "{{ (ansible_facts.tcp_listen + ansible_facts.udp_listen) | map(attribute='port') | unique | sort | list }}"
